@@ -1,0 +1,129 @@
+// ENVIROMENT VARIABLES : DEVELOPMENT
+
+
+@URL = http://127.0.0.1:8000/
+@contentType = application/json
+@authToken = {{login.response.body.token}}
+###
+// tours
+// get all
+GET {{URL}}api/v1/tours
+Authorization: Bearer {{authToken}}
+
+###
+// get tour
+GET {{URL}}api/v1/tours/60c124a0314cfd6c18401211
+
+###
+// Get all tours => top-5-chep
+GET {{URL}}api/v1/tours/top-5-chep
+
+###
+// Get tour-state
+GET {{URL}}api/v1/tours/tour-state
+
+###
+// Monthely-plans
+GET {{URL}}api/v1/tours/monthly-plans/2021
+
+
+###
+// creat tours
+POST {{URL}}api/v1/tours
+Content-Type:{{contentType}}
+
+{
+    "name": "testtesttesttesttest",
+    "duration": 4,
+    "maxGroupSize": 10,
+    "difficulty": "difficult",
+    "ratingsQuantity": 13,
+    "price": 997,
+    "summary": "Exciting adventure in the snow withsnowboarding and skiing",
+    "description": "Sed do eiusmod tempor incididunt utlabore et dolore magna aliqua, ut enim ad minimveniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat. cupidatatnon proident, sunt in culpa qui officia deseruntmollit anim id est laborum!\nDolor in reprehenderitin voluptate velit esse cillum dolore eu fugiat nullapariatur, exercitation ullamco laboris nisi utaliquip. Lorem ipsum dolor sit amet, consecteturadipisicing elit!",
+    "imageCover": "tour-3-cover.jpg",
+    "images": [
+        "tour-3-1.jpg",
+        "tour-3-2.jpg",
+        "tour-3-3.jpg"
+    ],
+    "startDates": [
+        "2022-01-05,10:00",
+        "2022-02-12,10:00",
+        "2023-01-06,10:00"
+    ],
+    "guides":[
+    "60f5e6f16018431fa4477791",
+    "60f5e88b3c835c344caa3aba"
+    ]
+}
+
+###
+// Delet tours
+DELETE {{URL}}api/v1/tours/60f9a76c700dde03345f7f67
+
+###
+// Update Toutre
+PATCH {{URL}}api/v1/tours/60c124a031c4cfd6c18401219
+Content-Type:{{contentType}}
+
+{
+    "ratingsAverage": "4.7"
+}
+
+###
+//---------------------------------------------------------------------------------
+///////////         USER
+
+//Get all 
+GET {{URL}}api/v1/user 
+
+###
+PATCH {{URL}}api/v1/user
+Content-Type:{{contentType}}
+
+###
+DELETE {{URL}}api/v1/user/6
+
+###
+// Update the current user
+PATCH {{URL}}api/v1/user//updateMe
+Authorization: Bearer {{authToken}}
+Content-Type:{{contentType}}
+
+{
+    "name":"dummy",
+    "password": "pas123456"
+}
+
+###
+// Delet the current user
+DELETE {{URL}}api/v1/user/deleteMe  
+Authorization: Bearer {{authToken}}
+
+###
+//---------------------------------------------------------------------------------
+
+/////////////      Authentication
+
+# @name signup
+POST {{URL}}api/v1/user/signup HTTP/1.1
+Content-Type:{{contentType}}
+
+{
+    "name":"lead-guide",
+    "email":"lead-guide@gmail.com",
+    "passward": "pas123456",
+    "passwardConformation":"pas123456",
+    "role":"lead-guide"
+}
+
+###
+# @name login
+POST {{URL}}api/v1/user/login
+Content-Type:{{contentType}}
+
+{
+ "email":"admin@gmail.com",
+ "passward": "pas123456"
+}
